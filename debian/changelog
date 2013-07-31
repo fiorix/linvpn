@@ -1,0 +1,12 @@
+linvpn (3.0-2) unstable; urgency=low
+
+  * Added ppp dep.
+
+ -- Thiago Martins <thiagocmartinsc@gmail.com>  Fri,  9 Dec 2005 18:48:00 -0200
+
+linvpn (3.0-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Alexandre Fiori <fiorix@gmail.com>  Fri,  9 Dec 2005 17:27:51 -0200
+

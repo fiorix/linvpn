@@ -1,0 +1,30 @@
+linvpn installation
+===================
+
+    Compiling
+
+The `configure' shellscript will attempt to generate a Makefile for you.
+
+To compile linvpn you need libgcrypt headers installed on the system: 
+http://directory.fsf.org/security/libgcrypt.html.
+
+If you're using *BSD I recommend you to use `gmake' instead of `make'.
+
+Basically, the process that well known sequence:
+
+$ ./configure
+$ make
+$ sudo make install
+
+If your system doesn't follow standard /usr/include and /usr/lib 
+directories you MUST specify it by using CFLAGS and LDFLAGS, as follows:
+
+$ CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ./configure
+$ make
+$ sudo make install
+
+The `PREFIX' for the installation is /usr, so binary files will be in
+/usr/sbin and manpages in /usr/share/man. The configuration file won't
+be installed by default, so you have to copy it from doc/ to /etc.
+
+See README for more information.

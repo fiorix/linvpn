@@ -1,0 +1,66 @@
+.TH "LINVPND" "8" "linvpn 3.0" "Alexandre Fiori" ""
+.SH "NAME"
+linvpnd \- network server who provides secure layer for pppd(8).
+.SH "SYNOPSIS"
+\fBlinvpnd\fR [\-u \fIuser\fR] [\-f \fIfile\fR] [\-b \fIaddr\fR] [\-p \fIport\fR] [\-k \fIvpn\fR] [\-l] [\-t] [\-d] [\-v]
+.SH "DESCRIPTION"
+\fIlinvpnd\fR is the network server daemon who provides secure layer for pppd(8) by receiving connections of linvpn(8) clients.
+
+The server listen for connection requests on TCP/1905 by default. It spawns a child process via fork(2) to handle each connection from client. Multiple clients will result in multiple child processes on the server side.
+
+All packets between client and server and vice\-versa is first cryptographed then transmitted. Cryptography is done by libgcrypt's 3des or blowfish, specified on the configuration file linvpn.conf(5).
+
+Two cryptography keys are used: for sending data from client to server and from server to client. Every packet has its own IV, based on the real packet size without padding, making the connection more secure against retransmission attacks.
+
+After establishing the connection, client and server spawns a pppd(8) process over the secure tunnel. As pppd creates network interfaces on both endpoints it is possible to exchange packets between networks behind them, via route(8) or ip(8).
+.SH "OPTIONS"
+.TP 
+\-u \fIuser\fR
+If specified, process will set effective user id to the uid of \fIuser\fR. Default is the user \fIdaemon\fR.
+
+.TP 
+\-f \fIfile\fR
+Use \fIfile\fR as configuration file instead of the default.
+
+.TP 
+\-b \fIaddr\fR
+Bind TCP port to address \fIaddr\fR instead of 0.0.0.0.
+
+.TP 
+\-p \fIport\fR
+Use \fIport\fR instead of the default TCP port.
+
+.TP 
+\-k \fIvpn\fR
+Server provides a way to control active vpn clients. To be able to kill a client connection it is not necessary to kill whole server. Use \-k \fIvpn\fR to kill active \fIvpn\fR client.
+
+.TP 
+\-l
+Show all active vpn clients.
+
+.TP 
+\-t
+Test configuration file.
+
+.TP 
+\-d
+Run in debug mode, without becoming daemon. This mode will consume a lot of CPU because of excessive messages on the console and may be used only by experts to trace data transfer.
+
+.TP 
+\-v
+Show version number.
+
+.SH "SIGNALS"
+Sending the \fBlinvpnd\fR a SIGHUP will cause it to reload its configuration file immediately. Active vpn clients are not affected by this.
+
+Sending SIGTERM or SIGINT will cause it to shutdown all active vpn clients and itself.
+.SH "FILES"
+.TP 
+\fI/etc/linvpn.conf\fR
+Configuration file for both client and server. See linvpn.conf(5) for details.
+
+.TP 
+\fI/usr/sbin/pppd\fR
+PPP daemon is used by both client and server to create local and remote network interfaces.
+.SH "SEE ALSO"
+linvpn(8), linvpn.conf(5), pppd(8)

@@ -1,0 +1,13 @@
+linvpn 3.0
+09 dec 2005
+
+To compile and install this software see INSTALL instructions.
+Sample configuration file can be found in doc/ directory.
+
+After installing linvpn, you'll need a kernel with PPP support and the
+ppp user-level daemon, pppd.
+
+To understand how the configuration file works see linvpn.conf(5).
+You should also read linvpnd(8) and linvpn(8).
+
+-- Fiori

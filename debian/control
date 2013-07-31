@@ -1,0 +1,33 @@
+Source: linvpn
+Section: net
+Priority: extra
+Maintainer: Alexandre Fiori <fiorix@gmail.com>
+Build-Depends: debhelper (>= 4.0.0), autotools-dev
+Standards-Version: 3.6.2
+
+Package: linvpn-common
+Architecture: any
+Description: creation of secure tunnels via pppd
+ linvpn allows creation of ppp tunnels adding a secure layer for pppd
+ cryptography is either 3des or blowfish provided by libgcrypt
+ .
+ This package provides common files for client and server
+
+Package: linvpn-client
+Architecture: any
+Depends: linvpn-common
+Depends: ${shlibs:Depends}, ${misc:Depends}, linvpn-common (>= 3.0-2), ppp
+Description: creation of secure tunnels via pppd
+ linvpn allows creation of ppp tunnels adding a secure layer for pppd
+ cryptography is either 3des or blowfish provided by libgcrypt
+ .
+ This package provides linvpn client
+
+Package: linvpn-server
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, linvpn-common (>= 3.0-2), ppp
+Description: creation of secure tunnels via pppd
+ linvpn allows creation of ppp tunnels adding a secure layer for pppd
+ cryptography is either 3des or blowfish provided by libgcrypt
+ .
+ This package provides linvpn server

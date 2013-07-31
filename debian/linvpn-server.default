@@ -1,0 +1,12 @@
+# Defaults for linvpn-server initscript
+# sourced by /etc/init.d/linvpn-server
+
+#
+# This is a POSIX shell fragment
+#
+
+# run linvpn server?
+START="0"
+
+# options to linvpnd
+OPTS=""

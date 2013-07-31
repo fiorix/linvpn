@@ -1,0 +1,15 @@
+# Defaults for linvpn-client initscript
+# sourced by /etc/init.d/linvpn-client
+
+#
+# This is a POSIX shell fragment
+#
+
+# run linvpn client?
+START="0"
+
+# list of vpn connections
+VPNS="home-job tosco"
+
+# options to linvpn
+OPTS=""

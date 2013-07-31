@@ -1,0 +1,54 @@
+.\" 
+.TH "LINVPN" "8" "linvpn 3.0" "Alexandre Fiori" ""
+.SH "NAME"
+linvpn \- network client who provides secure layer for pppd(8)
+ 
+.SH "SYNOPSIS"
+\fBlinvpn\fR [\-u \fIuser\fR] [\-f \fIfile\fR] [\-c \fIvpn\fR] [\-p \fIport\fR] [\-r \fIsec</fR>] [\-t] [\-d] [\-v]
+.SH "DESCRIPTION"
+\fIlinvpn\fR is the network client daemon who provides secure layer for pppd(8) by exchanging packets with linvpnd(8).
+
+Client must be started with \-c \fIvpn\fR where \fIvpn\fR is an entry of the configuration file linvpn.conf(5), describing two endpoints with crypto algorithm, keys and ppp addresses.
+After that, it tries to connect on the server and both acts as a layer for the ppp connection. For more information about how it works see linvpnd(8).
+.SH "OPTIONS"
+.TP 
+\-u \fIuser\fR
+If specified, process will set effective user id to the uid of \fIuser\fR. Default is the user \fIdaemon\fR.
+
+.TP 
+\-f \fIfile\fR
+Use \fIfile\fR as configuration file instead of the default.
+
+.TP 
+\-c \fIvpn\fR
+Connect on the \fIvpn\fR entry of the configuration file. In successful connections  pppd(8) will be started on both sides.
+
+.TP 
+\-p \fIport\fR
+Use \fIport\fR instead of the default TCP port.
+
+.TP 
+\-r \fIsec\fR
+When connection is lost by any reason client will retry to connect again after \fIsec\fR seconds. This is an infinite loop.
+
+.TP 
+\-t
+Test configuration file.
+
+.TP 
+\-d
+Run in debug mode, without becoming daemon. This mode will consume a lot of CPU because of excessive messages on the console and may be used only by experts to trace data transfer.
+
+.TP 
+\-v
+Show version number.
+.SH "FILES"
+.TP 
+\fI/etc/linvpn.conf\fR
+Configuration file for both client and server. See linvpn.conf(5) for details.
+
+.TP 
+\fI/usr/sbin/pppd\fR
+PPP daemon is used by both client and server to create local and remote network interfaces.
+.SH "SEE ALSO"
+linvpnd(8), linvpn.conf(5), pppd(8)
